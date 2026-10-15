@@ -101,7 +101,7 @@ export async function runInteractiveMode(options: InteractiveOptions): Promise<v
 
 	rl.close();
 	console.log(chalk.gray(`\nSession saved: ${state.sessionId}`));
-	console.log(chalk.gray(`Resume it with: cogent --session ${state.sessionId}\n`));
+	console.log(chalk.gray(`Resume it with: code_ai --session ${state.sessionId}\n`));
 }
 
 // Run one agent turn, rendering events and persisting whatever it produces.
@@ -157,7 +157,7 @@ function ask(rl: readline.Interface): Promise<string | null> {
 }
 
 function printBanner(state: ReplState, resumed?: Session): void {
-	console.log(chalk.bold("cogent") + chalk.gray(` — ${state.providerName}/${state.model}`));
+	console.log(chalk.bold("code_ai") + chalk.gray(` — ${state.providerName}/${state.model}`));
 
 	if (resumed) {
 		console.log(chalk.gray(`Resumed session ${resumed.id.slice(0, 8)} — ${state.messages.length} messages restored.`));

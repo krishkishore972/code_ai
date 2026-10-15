@@ -46,9 +46,9 @@ export async function main(argv: string[]): Promise<void> {
 	}
 
 	const providerName =
-		args.provider ?? resumed?.provider ?? settings.provider ?? process.env.COGENT_PROVIDER ?? "gemini";
+		args.provider ?? resumed?.provider ?? settings.provider ?? process.env.CODE_AI_PROVIDER ?? "gemini";
 	const model =
-		args.model ?? resumed?.model ?? settings.model ?? process.env.COGENT_MODEL ?? getDefaultModel(providerName);
+		args.model ?? resumed?.model ?? settings.model ?? process.env.CODE_AI_MODEL ?? getDefaultModel(providerName);
 
 	if (args.model && !getModelInfo(args.model)) {
 		throw new Error(`Unknown model: ${args.model}  (try --list-models)`);
@@ -120,7 +120,7 @@ async function printSessions(): Promise<void> {
 		console.log(`    ${when} · ${s.provider}/${s.model} · ${s.messageCount} messages`);
 		console.log(`    ${s.firstPrompt}\n`);
 	}
-	console.log("Resume with: cogent --session <id>\n");
+	console.log("Resume with: code_ai --session <id>\n");
 }
 
 async function readStdin(): Promise<string> {

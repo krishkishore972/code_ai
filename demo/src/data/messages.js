@@ -1,8 +1,8 @@
 // Snapshots of the `messages: Message[]` array as the run progresses. Every
-// shape here matches src/types.ts exactly — this is the data cogent actually
+// shape here matches src/types.ts exactly — this is the data code_ai actually
 // passes around, not a simplification.
 
-export const PROMPT = "how many tools does cogent register? write the answer to TOOLS.md";
+export const PROMPT = "how many tools does code_ai register? write the answer to TOOLS.md";
 
 export const SESSION_ID = "9f2c1b7e-0d4a-4c85-9d3f-1a6b8e5c2d10";
 export const CREATED_AT = "2026-09-07T14:22:08.311Z";
@@ -28,7 +28,7 @@ export const READ_RESULT = `1\timport type { ToolDefinition } from "../providers
 15\texport const ALL_TOOLS: Tool[] = [readTool, writeTool, editTool, bashTool, grepTool, findTool, lsTool, ...GIT_TOOLS];
 … (14 more lines)`;
 
-export const TOOLS_MD = `cogent registers 15 tools.
+export const TOOLS_MD = `code_ai registers 15 tools.
 
 Core (7): Read, Write, Edit, Bash, Grep, Find, Ls
 Git (8): GitStatus, GitLog, GitDiff, GitAdd, GitCommit, GitBranch, GitCheckout, GitReset
@@ -62,7 +62,7 @@ export const M_RESULT_2 = {
 		{
 			type: "tool_result",
 			tool_use_id: WRITE_ID,
-			content: "File written: /home/you/cogent/TOOLS.md",
+			content: "File written: /home/you/code_ai/TOOLS.md",
 			is_error: false,
 		},
 	],

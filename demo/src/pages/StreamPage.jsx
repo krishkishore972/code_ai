@@ -244,7 +244,7 @@ export default function StreamPage({ nav, answer, setAnswer }) {
 		<div className="app">
 			<header className="header">
 				<div className="brand">
-					<b>cogent</b>
+					<b>code_ai</b>
 					<span>streaming · generateContentStream → StreamEvent → loop → AgentEvent → your screen</span>
 				</div>
 				{nav}

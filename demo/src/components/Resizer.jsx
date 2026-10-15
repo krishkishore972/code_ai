@@ -6,7 +6,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 const MIN = 260;
 const MAX = 900;
-const KEY = "cogent-demo:inspector-width";
+const KEY = "code_ai-demo:inspector-width";
 
 export function useInspectorWidth() {
 	const [width, setWidth] = useState(() => {
@@ -62,7 +62,7 @@ export function Resizer({ setWidth }) {
 // ---- terminal height ----
 
 const H_MIN = 0; // fully collapsed — the canvas takes the whole column
-const H_KEY = "cogent-demo:term-height";
+const H_KEY = "code_ai-demo:term-height";
 
 // Never let the terminal eat the whole window; the canvas is the point.
 function hMax() {

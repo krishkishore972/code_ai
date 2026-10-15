@@ -44,7 +44,7 @@ export const NODES = [
 
 	{ id: "mode", label: "MODE", sub: "renderer", x: 486, y: 340, group: "ui", dynamic: "mode" },
 	{ id: "screen", label: "your terminal", sub: "AgentEvent → pixels", x: 248, y: 420, group: "io" },
-	{ id: "sessionStore", label: "appendEntry()", sub: ".cogent/sessions/<id>.jsonl", x: 486, y: 440, group: "store" },
+	{ id: "sessionStore", label: "appendEntry()", sub: ".code_ai/sessions/<id>.jsonl", x: 486, y: 440, group: "store" },
 
 	{ id: "runAgent", label: "runAgent()", sub: "src/agent/loop.ts", x: 760, y: 240, group: "agent" },
 	{ id: "assembler", label: "assemble blocks", sub: "loop.ts · pendingToolCalls", x: 760, y: 356, group: "agent" },

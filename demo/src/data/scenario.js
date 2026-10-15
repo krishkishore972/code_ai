@@ -1,6 +1,6 @@
 // The run being traced, step by step.
 //
-//   $ cogent -p "how many tools does cogent register? write the answer to TOOLS.md"
+//   $ code_ai -p "how many tools does code_ai register? write the answer to TOOLS.md"
 //
 // Provider is pinned to gemini/gemini-2.5-flash. Every payload below is the real
 // shape the corresponding function in src/ passes or returns; file refs point at
@@ -47,7 +47,7 @@ export const STEPS = [
 		edge: "argv->main",
 		payloads: {
 			print: [
-				d("process.argv.slice(2)", `["-p", "how many tools does cogent register? write the answer to TOOLS.md"]`),
+				d("process.argv.slice(2)", `["-p", "how many tools does code_ai register? write the answer to TOOLS.md"]`),
 				code("src/index.ts", `main(process.argv.slice(2)).catch((err) => {\n\tconsole.error("Fatal error:", …);\n\tprocess.exit(1);\n});`),
 			],
 			tui: [
@@ -55,7 +55,7 @@ export const STEPS = [
 				code("src/index.ts", `main(process.argv.slice(2)).catch((err) => {\n\tconsole.error("Fatal error:", …);\n\tprocess.exit(1);\n});`),
 			],
 		},
-		term: { print: [{ tone: "cmd", text: `$ cogent -p "${PROMPT}"` }], tui: [{ tone: "cmd", text: "$ cogent" }] },
+		term: { print: [{ tone: "cmd", text: `$ code_ai -p "${PROMPT}"` }], tui: [{ tone: "cmd", text: "$ code_ai" }] },
 	},
 	{
 		id: "parseArgs",
@@ -84,13 +84,13 @@ export const STEPS = [
 		id: "settings",
 		phase: "startup",
 		title: "loadSettings()",
-		note: "Three sources merge lowest → highest: ~/.cogent/settings.json, then ./.cogent/settings.json, then COGENT_* env vars.",
+		note: "Three sources merge lowest → highest: ~/.code_ai/settings.json, then ./.code_ai/settings.json, then CODE_AI_* env vars.",
 		file: "src/config/settings.ts:19",
 		nodes: ["main", "loadSettings"],
 		edge: "main->loadSettings",
 		payloads: [
-			d("global ~/.cogent/settings.json", `{}`),
-			d(".cogent/settings.json", `{\n  "systemPromptExtra": "Prefer functional style. Keep diffs small."\n}`),
+			d("global ~/.code_ai/settings.json", `{}`),
+			d(".code_ai/settings.json", `{\n  "systemPromptExtra": "Prefer functional style. Keep diffs small."\n}`),
 			d("merged Settings", `{\n  systemPromptExtra: "Prefer functional style. Keep diffs small."\n}`),
 		],
 	},
@@ -104,7 +104,7 @@ export const STEPS = [
 		payloads: [
 			code(
 				"src/main.ts",
-				`const providerName =\n\targs.provider ?? resumed?.provider ?? settings.provider\n\t?? process.env.COGENT_PROVIDER ?? "gemini";\nconst model =\n\targs.model ?? resumed?.model ?? settings.model\n\t?? process.env.COGENT_MODEL ?? getDefaultModel(providerName);`,
+				`const providerName =\n\targs.provider ?? resumed?.provider ?? settings.provider\n\t?? process.env.CODE_AI_PROVIDER ?? "gemini";\nconst model =\n\targs.model ?? resumed?.model ?? settings.model\n\t?? process.env.CODE_AI_MODEL ?? getDefaultModel(providerName);`,
 			),
 			d("resolved", `providerName = "gemini"\nmodel        = "gemini-2.5-flash"   // DEFAULT_MODELS.gemini`),
 			d("ModelInfo (providers/index.ts)", `{\n  id: "gemini-2.5-flash",\n  name: "Gemini 2.5 Flash",\n  provider: "gemini",\n  contextWindow: 1048576,\n  maxOutputTokens: 65536\n}`),
@@ -130,14 +130,14 @@ export const STEPS = [
 		id: "systemPrompt",
 		phase: "startup",
 		title: "buildSystemPrompt(extra)",
-		note: "Base instructions + the live tool list (generated from ALL_TOOLS, so a new tool needs no prompt edit) + any AGENTS.md / CLAUDE.md / .context / .cogent/context.md + settings.systemPromptExtra.",
+		note: "Base instructions + the live tool list (generated from ALL_TOOLS, so a new tool needs no prompt edit) + any AGENTS.md / CLAUDE.md / .context / .code_ai/context.md + settings.systemPromptExtra.",
 		file: "src/config/system-prompt.ts:12",
 		nodes: ["main", "systemPrompt"],
 		edge: "main->systemPrompt",
 		payloads: [
 			d(
 				"system: string  (~1.4 KB)",
-				`You are cogent, an autonomous coding assistant.\nYou are running in: /home/you/cogent\nToday: Monday, September 7, 2026\n\nYou have access to tools to read files, write files, run shell\ncommands, and search code.\nUse tools proactively to understand the codebase before making changes.\nAlways read a file before editing it. Verify your changes work.\nBe concise. No sycophantic openers. No unnecessary explanation.\n\nAvailable tools:\n- Read: Read the contents of a file. …\n- Write: Write content to a file, …\n- Edit: Replace an exact string in a file …\n… 12 more …\n\nPrefer functional style. Keep diffs small.`,
+				`You are code_ai, an autonomous coding assistant.\nYou are running in: /home/you/code_ai\nToday: Monday, September 7, 2026\n\nYou have access to tools to read files, write files, run shell\ncommands, and search code.\nUse tools proactively to understand the codebase before making changes.\nAlways read a file before editing it. Verify your changes work.\nBe concise. No sycophantic openers. No unnecessary explanation.\n\nAvailable tools:\n- Read: Read the contents of a file. …\n- Write: Write content to a file, …\n- Edit: Replace an exact string in a file …\n… 12 more …\n\nPrefer functional style. Keep diffs small.`,
 			),
 		],
 	},
@@ -151,7 +151,7 @@ export const STEPS = [
 		edge: "sessionCreate->sessionStore",
 		payloads: [
 			d("Session", `{\n  id: "${SESSION_ID}",\n  created_at: "${CREATED_AT}",\n  model: "gemini-2.5-flash",\n  provider: "gemini",\n  messages: []\n}`),
-			d(".cogent/sessions/9f2c1b7e….jsonl", `{"type":"session_info","id":"${SESSION_ID}","created_at":"${CREATED_AT}","model":"gemini-2.5-flash","provider":"gemini"}`),
+			d(".code_ai/sessions/9f2c1b7e….jsonl", `{"type":"session_info","id":"${SESSION_ID}","created_at":"${CREATED_AT}","model":"gemini-2.5-flash","provider":"gemini"}`),
 		],
 	},
 	{
@@ -210,7 +210,7 @@ export const STEPS = [
 		payloads: [
 			d(
 				"AgentOptions",
-				`{\n  providerName: "gemini",\n  model: "gemini-2.5-flash",\n  system: "You are cogent, …",\n  messages: [ { role: "user", content: "how many tools…" } ],\n  maxTurns: 20,\n  contextLimit: undefined,\n  canUseTool: ${"$MODE_GATE$"}\n}`,
+				`{\n  providerName: "gemini",\n  model: "gemini-2.5-flash",\n  system: "You are code_ai, …",\n  messages: [ { role: "user", content: "how many tools…" } ],\n  maxTurns: 20,\n  contextLimit: undefined,\n  canUseTool: ${"$MODE_GATE$"}\n}`,
 			),
 		],
 		events: [{ bus: "agent", type: "agent_start", detail: "" }],
@@ -269,7 +269,7 @@ export const STEPS = [
 		payloads: [
 			d(
 				"CompletionOptions",
-				`{\n  model: "gemini-2.5-flash",\n  system: "You are cogent, …",\n  messages: [ { role: "user", content: "how many tools…" } ],\n  tools: ToolDefinition[15],\n  max_tokens: 8192\n}`,
+				`{\n  model: "gemini-2.5-flash",\n  system: "You are code_ai, …",\n  messages: [ { role: "user", content: "how many tools…" } ],\n  tools: ToolDefinition[15],\n  max_tokens: 8192\n}`,
 			),
 		],
 	},
@@ -281,10 +281,10 @@ export const STEPS = [
 		file: "src/providers/gemini.ts:19",
 		nodes: ["gemini"],
 		payloads: [
-			d("contents", `[\n  { role: "user", parts: [ { text: "how many tools does cogent register? …" } ] }\n]`),
+			d("contents", `[\n  { role: "user", parts: [ { text: "how many tools does code_ai register? …" } ] }\n]`),
 			d(
 				"config",
-				`{\n  systemInstruction: "You are cogent, …",\n  tools: [ { functionDeclarations: [ …15… ] } ],\n  maxOutputTokens: 8192,\n  temperature: undefined\n}`,
+				`{\n  systemInstruction: "You are code_ai, …",\n  tools: [ { functionDeclarations: [ …15… ] } ],\n  maxOutputTokens: 8192,\n  temperature: undefined\n}`,
 			),
 		],
 	},
@@ -464,9 +464,9 @@ export const STEPS = [
 		payloads: [
 			d(
 				"raw chunk",
-				`{ parts: [ { functionCall: {\n    name: "Write",\n    args: {\n      file_path: "TOOLS.md",\n      content: "cogent registers 15 tools.\\n\\nCore (7): …"\n    }\n} } ] }`,
+				`{ parts: [ { functionCall: {\n    name: "Write",\n    args: {\n      file_path: "TOOLS.md",\n      content: "code_ai registers 15 tools.\\n\\nCore (7): …"\n    }\n} } ] }`,
 			),
-			d("StreamEvent × 3", `tool_use_start      id ${WRITE_ID.slice(0, 8)}… · Write\ntool_use_input_delta {"file_path":"TOOLS.md","content":"cogent registers 15 …"}\ntool_use_end        id ${WRITE_ID.slice(0, 8)}…`),
+			d("StreamEvent × 3", `tool_use_start      id ${WRITE_ID.slice(0, 8)}… · Write\ntool_use_input_delta {"file_path":"TOOLS.md","content":"code_ai registers 15 …"}\ntool_use_end        id ${WRITE_ID.slice(0, 8)}…`),
 		],
 		events: [
 			{ bus: "stream", type: "tool_use_start", detail: `id ${WRITE_ID.slice(0, 8)}… · Write` },
@@ -481,7 +481,7 @@ export const STEPS = [
 			print: [
 				{ tone: "dim", text: "[tokens: in=2890 out=126]" },
 				{ tone: "tool", text: "[Tool: Write]" },
-				{ tone: "dim", text: '{\n  "file_path": "TOOLS.md",\n  "content": "cogent registers 15 tools.\\n\\nCore (7): …"\n}' },
+				{ tone: "dim", text: '{\n  "file_path": "TOOLS.md",\n  "content": "code_ai registers 15 tools.\\n\\nCore (7): …"\n}' },
 			],
 			tui: [],
 		},
@@ -547,7 +547,7 @@ export const STEPS = [
 		payloads: {
 			allow: [
 				d("TOOLS.md (written)", TOOLS_MD),
-				d("ToolResult", `{ output: "File written: /home/you/cogent/TOOLS.md", isError: false }`),
+				d("ToolResult", `{ output: "File written: /home/you/code_ai/TOOLS.md", isError: false }`),
 			],
 			deny: [
 				d("PermissionDecision", `{\n  behavior: "deny",\n  message: "The user denied permission to run Write. Do not retry\n            this call; ask what they'd like instead."\n}`),
@@ -569,14 +569,14 @@ export const STEPS = [
 			print: {
 				allow: [
 					{ tone: "ok", text: "[Result: Write]" },
-					{ tone: "dim", text: "File written: /home/you/cogent/TOOLS.md" },
+					{ tone: "dim", text: "File written: /home/you/code_ai/TOOLS.md" },
 				],
 				deny: [{ tone: "err", text: "[Denied: Write] The user denied permission to run Write." }],
 			},
 			tui: {
 				allow: [
 					{ tone: "toolrow", text: "⏺ Write  TOOLS.md" },
-					{ tone: "result", text: "  ✓ File written: /home/you/cogent/TOOLS.md" },
+					{ tone: "result", text: "  ✓ File written: /home/you/code_ai/TOOLS.md" },
 				],
 				deny: [
 					{ tone: "toolrow", text: "⏺ Write  TOOLS.md" },
@@ -646,7 +646,7 @@ export const STEPS = [
 		edge: "mode->sessionStore",
 		payloads: [
 			d(
-				".cogent/sessions/9f2c1b7e….jsonl",
+				".code_ai/sessions/9f2c1b7e….jsonl",
 				`{"type":"session_info","id":"9f2c1b7e…","model":"gemini-2.5-flash",…}\n{"type":"message","message":{"role":"user","content":"how many tools…"}}\n{"type":"message","message":{"role":"assistant","content":[{"type":"text",…},{"type":"tool_use",…}]}}\n{"type":"message","message":{"role":"user","content":[{"type":"tool_result",…}]}}\n{"type":"message","message":{"role":"assistant","content":[{"type":"tool_use",…}]}}\n{"type":"message","message":{"role":"user","content":[{"type":"tool_result",…}]}}\n{"type":"message","message":{"role":"assistant","content":[{"type":"text",…}]}}`,
 			),
 		],
@@ -665,7 +665,7 @@ export const STEPS = [
 		file: { print: "src/modes/print.ts:12", tui: "src/tui/App.tsx:170" },
 		nodes: ["mode", "screen"],
 		edge: "mode->screen",
-		payloads: [d("resume", `$ cogent --session ${SESSION_ID}`)],
+		payloads: [d("resume", `$ code_ai --session ${SESSION_ID}`)],
 		term: {
 			print: [{ tone: "dim", text: "" }],
 			tui: [{ tone: "dim", text: "gemini/gemini-2.5-flash · context 0% · /help for commands" }],

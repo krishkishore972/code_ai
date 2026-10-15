@@ -1,7 +1,7 @@
 // One place for every colour the TUI uses, so the palette stays coherent.
 
 export const theme = {
-	accent: "#c96442", // cogent's terracotta — prompt marker, focus, brand
+	accent: "#c96442", // code_ai's terracotta — prompt marker, focus, brand
 	user: "#7aa2f7",
 	assistant: "#e6e6e6",
 	tool: "#7dcfff",

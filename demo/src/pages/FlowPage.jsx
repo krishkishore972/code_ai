@@ -96,7 +96,7 @@ export default function FlowPage({ nav }) {
 		<div className="app">
 			<header className="header">
 				<div className="brand">
-					<b>cogent</b>
+					<b>code_ai</b>
 					<span>dataflow · main() → runAgent() → gemini.complete() → tools → your terminal</span>
 				</div>
 				{nav}

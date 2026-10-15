@@ -86,11 +86,11 @@ export function parseArgs(argv: string[]): CliArgs {
 
 export function printHelp(): void {
 	console.log(`
-cogent — minimal coding agent
+code_ai — minimal coding agent
 
 USAGE
-  cogent [message]          Interactive mode (default)
-  cogent --print [message]  Print mode: stream output to stdout
+  code_ai [message]          Interactive mode (default)
+  code_ai --print [message]  Print mode: stream output to stdout
 
 OPTIONS
   --provider <name>     Provider: gemini (default), anthropic, or groq
@@ -109,8 +109,8 @@ ENVIRONMENT
   ANTHROPIC_API_KEY   Anthropic API key
   GEMINI_API_KEY      Google Gemini API key
   GROQ_API_KEY        Groq API key
-  COGENT_PROVIDER     Default provider
-  COGENT_MODEL        Default model
+  CODE_AI_PROVIDER    Default provider
+  CODE_AI_MODEL       Default model
 
 INTERACTIVE COMMANDS
   /model [id]   Switch model mid-conversation      /compact   Summarize history now
@@ -119,13 +119,13 @@ INTERACTIVE COMMANDS
   /help         All commands                       /exit      Quit
 
 EXAMPLES
-  cogent                                 # Start interactive chat
-  cogent "explain this codebase"         # One-shot interactive
-  echo "list all ts files" | cogent -p   # Pipe input, stream output
-  cogent --session <id>                  # Resume where you left off
+  code_ai                                 # Start interactive chat
+  code_ai "explain this codebase"         # One-shot interactive
+  echo "list all ts files" | code_ai -p   # Pipe input, stream output
+  code_ai --session <id>                  # Resume where you left off
 `);
 }
 
 export function printVersion(): void {
-	console.log("cogent 0.1.0");
+	console.log("code_ai 0.1.0");
 }

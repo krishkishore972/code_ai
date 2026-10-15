@@ -80,7 +80,7 @@ export async function runTuiCommand(line: string, ctx: CommandContext): Promise<
 			return {};
 
 		case "session":
-			ctx.notice(`Session ${ctx.sessionId}\nResume with: cogent --session ${ctx.sessionId}`);
+			ctx.notice(`Session ${ctx.sessionId}\nResume with: code_ai --session ${ctx.sessionId}`);
 			return {};
 
 		default:
@@ -187,5 +187,5 @@ async function showSessions(ctx: CommandContext): Promise<void> {
 				`  ${s.id.slice(0, 8)}  ${new Date(s.created_at).toLocaleString()}  ${s.messageCount} msgs\n    ${s.firstPrompt}`,
 		)
 		.join("\n");
-	ctx.notice(`Saved sessions — cogent --session <id> to resume\n${list}`);
+	ctx.notice(`Saved sessions — code_ai --session <id> to resume\n${list}`);
 }

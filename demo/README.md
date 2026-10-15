@@ -1,6 +1,6 @@
-# cogent — dataflow canvas
+# code_ai — dataflow canvas
 
-An interactive React canvas that traces one real cogent run end to end:
+An interactive React canvas that traces one real code_ai run end to end:
 
 ```
 main() → runPrintMode() / <App/> → runAgent() → gemini.complete() → StreamEvent
@@ -24,7 +24,7 @@ npm run dev      # http://localhost:5178
 ## The run being traced
 
 ```
-$ cogent -p "how many tools does cogent register? write the answer to TOOLS.md"
+$ code_ai -p "how many tools does code_ai register? write the answer to TOOLS.md"
 ```
 
 Three turns: the model calls `Read` (read-only, no prompt), then `Write` (not
@@ -114,7 +114,7 @@ Lane 3 and lane 4 are not scripted. `loopStep()` in `src/data/stream.js` is the
 `for await (const event of stream)` body from `src/agent/loop.ts` transcribed
 line-for-line, and every panel is a projection of `foldTo(ticks, index)` — so
 text blocks concatenate, tool calls assemble through `pendingToolCalls`, and
-`JSON.parse` happens on `tool_use_end` because that is where cogent does it.
+`JSON.parse` happens on `tool_use_end` because that is where code_ai does it.
 
 Things the streaming page makes visible that the canvas cannot:
 

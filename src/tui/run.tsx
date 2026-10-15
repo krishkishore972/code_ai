@@ -37,5 +37,5 @@ export async function runTui(options: TuiOptions): Promise<void> {
 
 	await app.waitUntilExit();
 	console.log(`\nSession saved: ${session.id}`);
-	console.log(`Resume it with: cogent --session ${session.id}\n`);
+	console.log(`Resume it with: code_ai --session ${session.id}\n`);
 }

@@ -1,9 +1,9 @@
 {
-	"name": "cogent-flow-demo",
+	"name": "code_ai-flow-demo",
 	"private": true,
 	"version": "0.1.0",
 	"type": "module",
-	"description": "Interactive canvas that traces cogent's dataflow: main() → runAgent() → gemini.complete() → tools → UI",
+	"description": "Interactive canvas that traces code_ai's dataflow: main() → runAgent() → gemini.complete() → tools → UI",
 	"scripts": {
 		"dev": "vite",
 		"build": "vite build",

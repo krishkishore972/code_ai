@@ -227,7 +227,7 @@ export function App(props: AppProps) {
 	});
 
 	if (!isRawModeSupported) {
-		return <Text color={theme.error}>cogent's TUI needs an interactive terminal. Use --print for piped input.</Text>;
+		return <Text color={theme.error}>code_ai's TUI needs an interactive terminal. Use --print for piped input.</Text>;
 	}
 
 	return (

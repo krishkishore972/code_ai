@@ -67,7 +67,7 @@ export async function runCommand(line: string, state: ReplState): Promise<Comman
 			return {};
 
 		case "session":
-			console.log(chalk.gray(`Session ${state.sessionId} — resume with: cogent --session ${state.sessionId}`));
+			console.log(chalk.gray(`Session ${state.sessionId} — resume with: code_ai --session ${state.sessionId}`));
 			return {};
 
 		default:
@@ -195,7 +195,7 @@ async function printSessions(): Promise<void> {
 		return;
 	}
 
-	console.log(`\n${chalk.bold("Saved sessions")}  ${chalk.gray("— cogent --session <id> to resume")}\n`);
+	console.log(`\n${chalk.bold("Saved sessions")}  ${chalk.gray("— code_ai --session <id> to resume")}\n`);
 	for (const s of sessions.slice(0, 10)) {
 		const when = new Date(s.created_at).toLocaleString();
 		console.log(

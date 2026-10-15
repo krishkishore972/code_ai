@@ -2,7 +2,7 @@
 // this file replays real Gemini chunks through a reducer that mirrors the
 // `for await (const event of stream)` body in src/agent/loop.ts line-for-line —
 // so assistantBlocks[], pendingToolCalls{} and the AgentEvents on screen are
-// derived exactly the way cogent derives them.
+// derived exactly the way code_ai derives them.
 
 import {
 	ANSWER,
@@ -21,7 +21,7 @@ import {
 } from "./messages.js";
 
 const DENY_MESSAGE = "The user denied permission to run Write. Do not retry this call; ask what they'd like instead.";
-const WRITE_OK = "File written: /home/you/cogent/TOOLS.md";
+const WRITE_OK = "File written: /home/you/code_ai/TOOLS.md";
 
 // ---------------------------------------------------------------------------
 // chunks: what generateContentStream() actually yields, one object per tick
@@ -380,7 +380,7 @@ return tool.execute(toolCall.input)`,
 			lane: "loop",
 			title: "hasToolCalls → false → break",
 			file: "src/agent/loop.ts:91",
-			note: "assistantBlocks holds one text block and no tool_use, so the while loop exits. This — not the stop reason — is what ends a cogent run.",
+			note: "assistantBlocks holds one text block and no tool_use, so the while loop exits. This — not the stop reason — is what ends a code_ai run.",
 			code: `const hasToolCalls = assistantBlocks.some((b) => b.type === "tool_use");
 if (!hasToolCalls) break;`,
 			push: denied ? M_ASSISTANT_3_DENIED : M_ASSISTANT_3,
@@ -390,7 +390,7 @@ if (!hasToolCalls) break;`,
 			lane: "agent",
 			title: "yield agent_end",
 			file: "src/agent/loop.ts:121",
-			note: "The final event carries both arrays: `messages` is the full history the loop ended with, `newMessages` is only what this run produced — which is what gets appended to .cogent/sessions/<id>.jsonl.",
+			note: "The final event carries both arrays: `messages` is the full history the loop ended with, `newMessages` is only what this run produced — which is what gets appended to .code_ai/sessions/<id>.jsonl.",
 			code: `yield { type: "agent_end", messages, newMessages };`,
 			agent: [{ type: "agent_end", messages: "Message[7]", newMessages: "Message[6]" }],
 			done: true,

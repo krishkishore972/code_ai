@@ -1,10 +1,10 @@
 {
-	"name": "cogent",
+	"name": "code_ai",
 	"version": "0.1.0",
 	"description": "A minimal coding agent CLI — Gemini + Groq, all tools, session management",
 	"type": "module",
 	"bin": {
-		"cogent": "./dist/index.js"
+		"code_ai": "./dist/index.js"
 	},
 	"scripts": {
 		"dev": "tsx --env-file-if-exists=.env src/index.ts",

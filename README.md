@@ -1,8 +1,8 @@
-# cogent
+# code_ai
 
 ## Demo
 
-[<img src="https://cdn.loom.com/sessions/thumbnails/366914f885fe4241a38b8a9cdad8c09b-84de9d06212644a2.gif" width="640" alt="Watch the cogent walkthrough">](https://www.loom.com/share/366914f885fe4241a38b8a9cdad8c09b)
+[<img src="https://cdn.loom.com/sessions/thumbnails/366914f885fe4241a38b8a9cdad8c09b-84de9d06212644a2.gif" width="640" alt="Watch the code_ai walkthrough">](https://www.loom.com/share/366914f885fe4241a38b8a9cdad8c09b)
 
 [Watch the walkthrough](https://www.loom.com/share/366914f885fe4241a38b8a9cdad8c09b) (3:38)
 
@@ -15,9 +15,9 @@ of the box (Anthropic, Google Gemini, and Groq) behind a single streaming
 interface.
 
 ```bash
-cogent "find every TODO in src/ and tell me what's left"
-echo "explain the agent loop" | cogent -p
-cogent                       # interactive REPL
+code_ai "find every TODO in src/ and tell me what's left"
+echo "explain the agent loop" | code_ai -p
+code_ai                       # interactive REPL
 ```
 
 ---
@@ -41,7 +41,7 @@ cogent                       # interactive REPL
 ## Overview
 
 Most "AI coding" tooling hides the agent behind a wall of SDK abstractions.
-cogent is the opposite: the entire loop is a few hundred lines of readable
+code_ai is the opposite: the entire loop is a few hundred lines of readable
 TypeScript, so every moving part of a tool-using agent is visible end to end —
 how a tool call is parsed out of a token stream, executed, and fed back in; how
 two very different provider APIs are normalized into one message format; how
@@ -213,8 +213,8 @@ test/                     # provider, tool, and agent-loop suites
 Requires **Node 22+** and at least one provider key.
 
 ```bash
-git clone https://github.com/mr-raj12/cogent.git
-cd cogent
+git clone https://github.com/mr-raj12/code_ai.git
+cd code_ai
 npm install
 cp .env.example .env       # add your key(s)
 ```
@@ -242,9 +242,9 @@ node dist/index.js "explain what this project does"
 ## Usage
 
 ```
-cogent [message]            Interactive TUI (default)
-cogent --print [message]    One-shot: stream the answer to stdout
-echo "..." | cogent -p      Read the prompt from a pipe
+code_ai [message]            Interactive TUI (default)
+code_ai --print [message]    One-shot: stream the answer to stdout
+echo "..." | code_ai -p      Read the prompt from a pipe
 
 Options
   --provider <name>   anthropic, gemini (default), or groq
@@ -261,20 +261,20 @@ Options
 ```
 
 ```bash
-cogent --provider groq --model llama-3.3-70b-versatile "refactor src/tools/grep.ts"
-cogent --list-models
+code_ai --provider groq --model llama-3.3-70b-versatile "refactor src/tools/grep.ts"
+code_ai --list-models
 ```
 
 ## Configuration
 
 Settings merge from three sources, each overriding the previous:
 
-1. Global — `~/.cogent/settings.json`
-2. Project — `.cogent/settings.json`
-3. Environment — `COGENT_PROVIDER`, `COGENT_MODEL`
+1. Global — `~/.code_ai/settings.json`
+2. Project — `.code_ai/settings.json`
+3. Environment — `CODE_AI_PROVIDER`, `CODE_AI_MODEL`
 
 ```jsonc
-// .cogent/settings.json
+// .code_ai/settings.json
 {
   "provider": "groq",
   "model": "llama-3.3-70b-versatile",
@@ -284,7 +284,7 @@ Settings merge from three sources, each overriding the previous:
 
 The system prompt is assembled at startup from base instructions, the live tool
 list, and the first of these files found in the working directory:
-`AGENTS.md`, `CLAUDE.md`, `.context`, `.cogent/context.md`.
+`AGENTS.md`, `CLAUDE.md`, `.context`, `.code_ai/context.md`.
 
 ## Tools
 
