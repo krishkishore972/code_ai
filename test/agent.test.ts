@@ -9,8 +9,8 @@ import { writeTool } from "../src/tools/write.js";
 const geminiKey = process.env.GEMINI_API_KEY;
 const groqKey = process.env.GROQ_API_KEY;
 
-const providerName = geminiKey ? "gemini" : groqKey ? "groq" : null;
-const model = geminiKey ? "gemini-2.5-flash" : "llama-3.3-70b-versatile";
+const providerName = groqKey ? "groq" : geminiKey ? "gemini" : null;
+const model = groqKey ? "openai/gpt-oss-120b" : "gemini-2.5-flash";
 
 if (!providerName) {
 	console.error("No API keys found. Set GEMINI_API_KEY or GROQ_API_KEY.");

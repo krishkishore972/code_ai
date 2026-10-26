@@ -1,6 +1,6 @@
 export interface CliArgs {
 	print: boolean; // --print / -p: non-interactive, stream to stdout
-	provider?: string; // --provider gemini|groq
+	provider?: string; // --provider groq|gemini|anthropic
 	model?: string; // --model <id>
 	session?: string; // --session <id>: resume an existing session
 	contextLimit?: number; // --context-limit <n>: override the model's window
@@ -93,7 +93,7 @@ USAGE
   code_ai --print [message]  Print mode: stream output to stdout
 
 OPTIONS
-  --provider <name>     Provider: gemini (default), anthropic, or groq
+  --provider <name>     Provider: groq (default), anthropic, or gemini
   --model <id>          Model ID to use (see --list-models)
   --session <id>        Resume a previous session
   --context-limit <n>   Pretend the context window is n tokens (forces compaction)

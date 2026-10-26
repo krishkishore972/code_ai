@@ -16,7 +16,7 @@ export type AgentEvent =
 
 // What you pass to runAgent()
 export interface AgentOptions {
-	providerName: string; // "gemini" | "groq"
+	providerName: string; // "groq" | "gemini" | "anthropic"
 	model: string;
 	system: string;
 	messages: Message[]; // existing history — new messages appended during the run

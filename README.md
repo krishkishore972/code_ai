@@ -247,7 +247,7 @@ code_ai --print [message]    One-shot: stream the answer to stdout
 echo "..." | code_ai -p      Read the prompt from a pipe
 
 Options
-  --provider <name>   anthropic, gemini (default), or groq
+  --provider <name>   groq (default), anthropic, or gemini
   --model <id>        Specific model (see --list-models)
   --session <id>      Resume a saved session (see --list-sessions)
   --list-models       Print available models

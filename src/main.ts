@@ -46,7 +46,7 @@ export async function main(argv: string[]): Promise<void> {
 	}
 
 	const providerName =
-		args.provider ?? resumed?.provider ?? settings.provider ?? process.env.CODE_AI_PROVIDER ?? "gemini";
+		args.provider ?? resumed?.provider ?? settings.provider ?? process.env.CODE_AI_PROVIDER ?? "groq";
 	const model =
 		args.model ?? resumed?.model ?? settings.model ?? process.env.CODE_AI_MODEL ?? getDefaultModel(providerName);
 
